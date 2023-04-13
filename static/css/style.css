@@ -84,17 +84,22 @@ body {
 
 .post-link {
     text-decoration: none;
-    color: #445261;
+    color: #d1d1d1;
 }
 
 .post-link:hover,
 .page-link {
-    color: #E84610;
+    color: #ececec;
 }
 
 .post-title {
     margin-top: 20%;
     margin-left: 5%;
+}
+
+.post-tile {
+    background-color: #0d0d0d;
+    border-radius: 20px;
 }
 
 .post-subtitle {
