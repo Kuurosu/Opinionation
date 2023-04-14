@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+{% load custom_filter %}
+{% load humanize %}
 {% load crispy_forms_tags %}
 
 <div class="masthead">
@@ -30,9 +32,9 @@
                     {{ post.content | safe }}
                 </p>
                 <div class="row">
-                    <div class="col-1">
+                    <div class="col-2">
                         <strong>
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and not disliked %}
                             <form action="{% url 'post_like' post.slug %}" class="d-inline" method="POST">
                                 {% csrf_token %}
                                 {% if liked %}
@@ -53,7 +55,33 @@
                             <span class="text-secondary">
                                 {{ post.number_of_likes }}
                             </span>
+                            {% if user.is_authenticated and not liked %}
+                            <form action="{% url 'post_dislike' post.slug %}" class="d-inline" method="POST">
+                                {% csrf_token %}
+                                {% if disliked %}
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like">
+                                    <i class="fas fa-thumbs-down"></i>
+                                </button>
+                                {% else %}
+                                <button type="submit" name="blogpost_id" value="{{post.slug}}" class="btn-like">
+                                    <i class="far fa-thumbs-down"></i>
+                                </button>
+                                {% endif %}
+                            </form>
+                            {% else %}
+                            <span class="text-secondary">
+                                <i class="far fa-thumbs-down"></i>
+                            </span>
+                            {% endif %}
+                            <span class="text-secondary">
+                                {{ post.number_of_dislikes }}
+                            </span>
                         </strong>
+                    </div>
+                    <div class="col-1">
+                        <p>Like-to-Dislike Ratio:
+                            {% calculate_percentage post %}
+                        </p>
                     </div>
                     <div class="col-1">
                         {% with comments.count as total_comments %}
