@@ -142,3 +142,23 @@ body {
     background: transparent;
     border: none;
 }
+
+.hero-image {
+    background-image: linear-gradient(to right, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%), url("https://res.cloudinary.com/dbcnrsj4j/image/upload/v1681759238/cinema-audience_ykc0iw.jpg");
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+  }
+
+.hero-text {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 70vw;
+    margin-left: 10vw;
+    width: fit-content;
+}
