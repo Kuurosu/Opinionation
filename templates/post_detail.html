@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
 {% load custom_filter %}
-{% load humanize %}
 {% load crispy_forms_tags %}
 
 <div class="masthead">
@@ -9,7 +8,14 @@
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <h1 class="post-title">
-                    {{ post.title }}
+                    {{ post.title }} | 
+                    {% if post.streaming_service == 'Netflix' %}
+                        <i class="fab fa-square-n"></i>
+                    {% elif post.streaming_service == 'Prime' %}
+                        <i class="fab fa-amazon"></i>
+                    {% elif post.streaming_service == 'Apple TV' %}
+                        <i class="fab fa-apple"></i>
+                    {% endif %}
                 </h1>
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
             </div>

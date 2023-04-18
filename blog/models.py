@@ -22,6 +22,19 @@ class Post(models.Model):
     dislikes = models.ManyToManyField(
         User, related_name='blog_dislikes', blank=True
         )
+    NETFLIX = 'Netflix'
+    PRIME = 'Prime'
+    APPLE_TV = 'Apple TV'
+    STREAMING_CHOICES = (
+        (NETFLIX, 'Netflix'),
+        (PRIME, 'Prime'),
+        (APPLE_TV, 'Apple TV'),
+    )
+    streaming_service = models.CharField(
+        max_length=10,
+        choices=STREAMING_CHOICES,
+        default='Netflix'
+        )
 
     class Meta:
         ordering = ['-created_on']

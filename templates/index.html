@@ -23,7 +23,15 @@
                                 </div>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="class-title">{{ post.title }}</h2>
+                                <h2 class="class-title">{{ post.title }}<span class="stream">
+                                    {% if post.streaming_service == 'Netflix' %}
+                                        <i class="fa-sharp fa-solid fa-n"></i>
+                                    {% elif post.streaming_service == 'Prime' %}
+                                        <i class="fab fa-amazon"></i>
+                                    {% elif post.streaming_service == 'Apple TV' %}
+                                        <i class="fab fa-apple"></i>
+                                    {% endif %}
+                                </span></h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
