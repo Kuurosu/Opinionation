@@ -162,3 +162,19 @@ body {
     margin-left: 10vw;
     width: fit-content;
 }
+
+.stream {
+    font-size: smaller;
+}
+
+.netflix {
+    color: #bb2323;
+}
+
+.font-small {
+    font-size: smaller;
+}
+
+.font-blue {
+    color: #00aaaa;
+}

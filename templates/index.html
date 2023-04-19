@@ -23,13 +23,13 @@
                                 </div>
                             </div>
                             <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                                <h2 class="class-title">{{ post.title }}<span class="stream">
+                                <h2 class="class-title">{{ post.title }} | <span class="stream">
                                     {% if post.streaming_service == 'Netflix' %}
-                                        <i class="fa-sharp fa-solid fa-n"></i>
+                                        <span class="netflix"><i class="fa-solid fa-n"></i></span>
                                     {% elif post.streaming_service == 'Prime' %}
-                                        <i class="fab fa-amazon"></i>
+                                        <span class="small font-blue">Prime</span><span class="small"> Video</span>
                                     {% elif post.streaming_service == 'Apple TV' %}
-                                        <i class="fab fa-apple"></i>
+                                        <i class="fab fa-apple"> <span class="small"> TV</span></i>
                                     {% endif %}
                                 </span></h2>
                                 <p class="card-text">{{ post.excerpt }}</p>
