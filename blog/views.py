@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import CommentForm, PostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PostList(generic.ListView):
@@ -127,5 +128,30 @@ class PostUpdate(View):
                     'post_update.html',
                     {'form': form, 'post': post}
                     )
+        else:
+            raise Http404
+
+
+class PostDeleteView(LoginRequiredMixin, View):
+    def get_object(self, slug):
+        post = get_object_or_404(Post, slug=slug)
+        return post
+
+    def get(self, request, slug):
+        post = self.get_object(slug=slug)
+        if request.user.is_staff:
+            return render(
+                request,
+                'post_delete.html',
+                {'post': post}
+            )
+        else:
+            raise Http404
+
+    def post(self, request, slug):
+        post = self.get_object(slug=slug)
+        if request.user.is_staff:
+            post.delete()
+            return redirect('home')
         else:
             raise Http404

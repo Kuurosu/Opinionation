@@ -9,4 +9,9 @@ urlpatterns = [
         'dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'
         ),
     path('edit/<slug:slug>/', views.PostUpdate.as_view(), name='post_update'),
+    path(
+        'post/<slug:slug>/delete/',
+        views.PostDeleteView.as_view(),
+        name='post_delete'
+        ),
 ]
