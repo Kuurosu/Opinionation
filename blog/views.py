@@ -157,14 +157,16 @@ class PostDeleteView(LoginRequiredMixin, View):
             raise Http404
 
 
-def CreatePost(request):
-    if request.method == 'POST':
+class CreatePost(View):
+    def get(self, request):
+        form = PostForm()
+        return render(request, 'create_post.html', {'form': form})
+
+    def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
             return redirect('post_detail', slug=post.slug)
-    else:
-        form = PostForm()
-    return render(request, 'create_post.html', {'form': form})
+        return render(request, 'create_post.html', {'form': form})
