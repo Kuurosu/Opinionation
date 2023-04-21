@@ -178,3 +178,8 @@ body {
 .font-blue {
     color: #00aaaa;
 }
+
+.edit-btn {
+    margin-left: 5%;
+    margin-bottom: 1rem;
+}
