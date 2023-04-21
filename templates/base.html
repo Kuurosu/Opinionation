@@ -52,6 +52,11 @@
                 <span class="navbar-text text-muted">
                     Where everyone's opinions matter
                 </span>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_post' %}">Create Post</a>
+                </li>
+                {% endif %}
             </div>
         </div>
     </nav>

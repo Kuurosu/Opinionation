@@ -10,11 +10,11 @@
                 <h1 class="post-title">
                     {{ post.title }} | 
                     {% if post.streaming_service == 'Netflix' %}
-                        <i class="fab fa-square-n"></i>
+                        <span class="netflix"><i class="fa-solid fa-n"></i></span>
                     {% elif post.streaming_service == 'Prime' %}
-                        <i class="fab fa-amazon"></i>
+                        <span class="small font-blue">Prime</span><span class="small"> Video</span>
                     {% elif post.streaming_service == 'Apple TV' %}
-                        <i class="fab fa-apple"></i>
+                        <i class="fab fa-apple"> <span class="small"> TV</span></i>
                     {% endif %}
                 </h1>
                 <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
