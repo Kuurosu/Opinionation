@@ -8,4 +8,5 @@ urlpatterns = [
     path(
         'dislike/<slug:slug>', views.PostDislike.as_view(), name='post_dislike'
         ),
+    path('edit/<slug:slug>/', views.PostUpdate.as_view(), name='post_update'),
 ]

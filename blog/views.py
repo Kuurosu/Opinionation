@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
@@ -95,3 +95,37 @@ class PostDislike(View):
             post.dislikes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class PostUpdate(View):
+    def get_object(self, slug):
+        post = get_object_or_404(Post, slug=slug)
+        return post
+
+    def get(self, request, slug):
+        post = self.get_object(slug=slug)
+        if request.user.is_staff:
+            form = PostForm(instance=post)
+            return render(
+                request,
+                'post_update.html',
+                {'form': form, 'post': post}
+                )
+        else:
+            raise Http404
+
+    def post(self, request, slug):
+        post = self.get_object(slug=slug)
+        if request.user.is_staff:
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form.save()
+                return redirect('post_detail', slug=post.slug)
+            else:
+                return render(
+                    request,
+                    'post_update.html',
+                    {'form': form, 'post': post}
+                    )
+        else:
+            raise Http404
