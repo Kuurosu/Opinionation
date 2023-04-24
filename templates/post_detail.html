@@ -121,6 +121,9 @@
                         </span> wrote:
                     </p>
                     {{ comment.body | linebreaks }}
+                    {% if user.username == comment.name %}
+                        <a href="{% url 'edit_comment' post.slug %}?comment_id={{ comment.id }}">Edit</a>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>

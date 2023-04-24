@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -170,3 +170,30 @@ class CreatePost(View):
             post.save()
             return redirect('post_detail', slug=post.slug)
         return render(request, 'create_post.html', {'form': form})
+
+
+class EditComment(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        comment_id = request.GET.get('comment_id')
+        comment = get_object_or_404(Comment, id=comment_id, post=post)
+        comment_form = CommentForm(instance=comment)
+        context = {
+            'post': post,
+            'comment': comment,
+            'comment_form': comment_form}
+        return render(request, 'edit_comment.html', context)
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        comment_id = request.POST.get('comment_id')
+        comment = get_object_or_404(Comment, id=comment_id, post=post)
+        comment_form = CommentForm(request.POST, instance=comment)
+        if comment_form.is_valid():
+            comment_form.save()
+            return redirect('post_detail', slug=post.slug)
+        context = {
+            'post': post,
+            'comment': comment,
+            'comment_form': comment_form}
+        return render(request, 'edit_comment.html', context)
