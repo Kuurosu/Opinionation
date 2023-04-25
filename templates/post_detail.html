@@ -123,6 +123,7 @@
                     {{ comment.body | linebreaks }}
                     {% if user.username == comment.name %}
                         <a href="{% url 'edit_comment' post.slug %}?comment_id={{ comment.id }}">Edit</a>
+                        <a href="{% url 'delete_comment' slug=post.slug comment_id=comment.id %}">Delete</a>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -132,7 +133,7 @@
             <div class="card-body">
                 {% if commented %}
                 <div class="alert alert-success" role="alert">
-                    Your comment is awaiting approval
+                    Thank you for your comment!
                 </div>
                 {% else %}
 

@@ -197,3 +197,15 @@ class EditComment(View):
             'comment': comment,
             'comment_form': comment_form}
         return render(request, 'edit_comment.html', context)
+
+
+class DeleteComment(View):
+    def get(self, request, slug, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id, post__slug=slug)
+        context = {'comment': comment}
+        return render(request, 'delete_comment.html', context)
+
+    def post(self, request, slug, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id, post__slug=slug)
+        comment.delete()
+        return redirect('post_detail', slug=slug)

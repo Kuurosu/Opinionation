@@ -51,6 +51,9 @@
                     </li>
                     {% endif %}
                 </ul>
+                {% if user.is_authenticated %}
+                    <div class="welcome-name">Welcome {{ user.username }}</div>
+                {% endif %}
                 <span class="navbar-text text-muted">
                     Where everyone's opinions matter
                 </span>
@@ -58,9 +61,6 @@
                 <div class="post-btn">
                     <a href="{% url 'create_post' %}" class="btn btn-success">Create Post</a>
                 </div>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <div>Welcome {{ user.username }}</div>
                 {% endif %}
             </div>
         </div>
