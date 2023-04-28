@@ -51,6 +51,9 @@
                         <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'about-us' %}">About us</a>
+                    </li>
                 </ul>
                 {% if user.is_authenticated %}
                     <div class="welcome-name">Welcome {{ user.username }}</div>

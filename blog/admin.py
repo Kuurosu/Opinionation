@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, BlogOwner
 from django_summernote.admin import SummernoteModelAdmin
 from django.forms import Select
 from django.utils.html import format_html
@@ -26,3 +26,9 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
+
+
+@admin.register(BlogOwner)
+class BlogOwnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_on')
+    search_fields = ('name', 'email')

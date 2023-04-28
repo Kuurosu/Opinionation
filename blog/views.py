@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
+from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
-from .models import Post, Comment
+from .models import Post, Comment, BlogOwner
 from .forms import CommentForm, PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -209,3 +210,15 @@ class DeleteComment(View):
         comment = get_object_or_404(Comment, id=comment_id, post__slug=slug)
         comment.delete()
         return redirect('post_detail', slug=slug)
+
+
+class AboutView(generic.ListView):
+    template_name = 'about-us.html'
+
+    def get_queryset(self):
+        return BlogOwner.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['owner'] = BlogOwner.objects.first()
+        return context
