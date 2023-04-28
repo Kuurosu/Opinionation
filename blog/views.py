@@ -40,6 +40,10 @@ class PostDetail(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comments = post.comments.filter(approved=True).order_by('created_on')
@@ -77,6 +81,10 @@ class PostDetail(View):
 
 class PostLike(View):
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = get_object_or_404(Post, slug=slug)
 
         if post.likes.filter(id=request.user.id).exists():
@@ -89,6 +97,10 @@ class PostLike(View):
 
 class PostDislike(View):
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = get_object_or_404(Post, slug=slug)
 
         if post.dislikes.filter(id=request.user.id).exists():
@@ -99,12 +111,16 @@ class PostDislike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class PostUpdate(View):
+class PostUpdate(LoginRequiredMixin, View):
     def get_object(self, slug):
         post = get_object_or_404(Post, slug=slug)
         return post
 
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = self.get_object(slug=slug)
         if request.user.is_staff:
             form = PostForm(instance=post)
@@ -117,6 +133,10 @@ class PostUpdate(View):
             raise Http404
 
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = self.get_object(slug=slug)
         if request.user.is_staff:
             form = PostForm(request.POST, instance=post)
@@ -139,6 +159,10 @@ class PostDeleteView(LoginRequiredMixin, View):
         return post
 
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = self.get_object(slug=slug)
         if request.user.is_staff:
             return render(
@@ -150,6 +174,10 @@ class PostDeleteView(LoginRequiredMixin, View):
             raise Http404
 
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = self.get_object(slug=slug)
         if request.user.is_staff:
             post.delete()
@@ -158,12 +186,20 @@ class PostDeleteView(LoginRequiredMixin, View):
             raise Http404
 
 
-class CreatePost(View):
+class CreatePost(LoginRequiredMixin, View):
     def get(self, request):
+        if not request.user.is_authenticated and request.user.is_staff:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         form = PostForm()
         return render(request, 'create_post.html', {'form': form})
 
     def post(self, request):
+        if not request.user.is_authenticated and request.user.is_staff:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -175,6 +211,10 @@ class CreatePost(View):
 
 class EditComment(View):
     def get(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = get_object_or_404(Post, slug=slug)
         comment_id = request.GET.get('comment_id')
         comment = get_object_or_404(Comment, id=comment_id, post=post)
@@ -186,6 +226,10 @@ class EditComment(View):
         return render(request, 'edit_comment.html', context)
 
     def post(self, request, slug):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         post = get_object_or_404(Post, slug=slug)
         comment_id = request.POST.get('comment_id')
         comment = get_object_or_404(Comment, id=comment_id, post=post)
@@ -202,11 +246,19 @@ class EditComment(View):
 
 class DeleteComment(View):
     def get(self, request, slug, comment_id):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         comment = get_object_or_404(Comment, id=comment_id, post__slug=slug)
         context = {'comment': comment}
         return render(request, 'delete_comment.html', context)
 
     def post(self, request, slug, comment_id):
+        if not request.user.is_authenticated:
+            return redirect(
+                reverse('post_detail', args={...})
+            )
         comment = get_object_or_404(Comment, id=comment_id, post__slug=slug)
         comment.delete()
         return redirect('post_detail', slug=slug)
