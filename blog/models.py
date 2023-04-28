@@ -65,3 +65,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} by {self.name}"
+
+
+class BlogOwner(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    bio = models.TextField(blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return self.name
