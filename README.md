@@ -1,5 +1,7 @@
 # Opinionation
 
+<img src="images-readme/responsive.png">
+
 [Link to live Site](https://opinionation.herokuapp.com/)
 
 Opinionation is a website that allows users to read and share their opinions on various movies and TV shows. The website is designed to be user-friendly and easy to navigate, with several key elements that make it stand out.
@@ -162,33 +164,147 @@ Languages Used:
 
 ### Frameworks and Libraries Used:
 
+- [Bootstrap:](https://getbootstrap.com/) Bootstrap CSS Framework used for styling and to build responsive web pages.
+- [FontAwesome:](https://fontawesome.com) FontAwesome for all the icons such as the like, dislike buttons. 
+- [Cloudinary:](https://cloudinary.com/) Used to store all blog images and uploaded images.
+- [Django:](https://www.djangoproject.com/) Main Python framework used in the development.
+- [Django Allauth:](https://django-allauth.readthedocs.io/en/latest/index.html) Used for authentication and account registration.
+- [Django Crispy Forms:](https://django-crispy-forms.readthedocs.io/en/latest/) Used to simplify the rendering of Django forms.
+- [dj_database_url:](https://pypi.org/project/dj-database-url/) Used to allow database urls to connect to the postgres database.
+- [Gunicorn:](https://gunicorn.org/) Green Unicorn, used as the Web Server to run Django on Heroku.
+- [psycopg2:](https://pypi.org/project/psycopg2/) Used PostgreSQL database adapter.
+- [Summernote:](https://github.com/summernote/django-summernote) To provide a WYSIWYG editor for customizing new blog content and add images.
+
 ### Software and Web Applications Used:
+
+- [Am I Responsive:](http://ami.responsivedesign.is) Checking the responsive.
+- [Chrome DevTools:](https://developer.chrome.com/docs/devtools/) Used to test the response on different screen sizes, debugging and to generate a Lighthouse report to analyze page load.
+- [Font Awesome:](https://fontawesome.com/) Used throughout the site to add icons for aesthetic and UX purposes.
+- [Git:](https://git-scm.com/) Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
+- [GitHub:](https://github.com/) GitHub is used to store the projects code after being pushed from Git and to create the Kanban board used for this project.
+- [Google Fonts:](https://fonts.google.com/) To import font family ’Cabin Sketch’ which is used throughout the site. Added fallback font sans-serif.
+- [Heroku:](https://www.heroku.com/) For deployment and hosting of the application.
+- [Heroku PostgreSQL:](https://www.heroku.com/postgres) The database used for this application.
+- [HTML Validator:](https://validator.w3.org/) Check your code for HTML validation.
+- [JSHint:](https://jshint.com/) Check code for JavaScript validation.
+- [W3 CSS Validator:](https://jigsaw.w3.org/css-validator/) Check your code for CSS validation.
 
 ## Testing
 
 ### Browser Testing
 
+I have thoroughly tested this website to ensure optimal performance and compatibility. Our tests have been carried out on popular web browsers including:
+
+- Google Chrome 
+- Mozilla Firefox
+- Safari
+
+All of which have been found to work seamlessly with the site. Additionally, I have also tested the website on an iPhone 13 Pro, and can confirm that it is fully responsive and functions as intended on mobile devices."
+
 ### Responsiveness
+
+Chrome developer tool have been used to check the responsiveness.
+
+  - I have tested that this application works on different screen sizes from iPhone 5 (320px wide) and very large screens like 5K iMac Pro (5120 x 2880 px).
 
 ### Validator Testing
 
 #### W3C Markup Validator:
 
+I have checked all the pages to see if the HTML code is without errors. I have omitted the Django code from the files as that would cause errors unrelated to the HTML code itself. 
+
+<img src="images-readme/base-checker.png">
+
 #### W3C CSS Validator:
+
+<img src="images-readme/css-check.png">
 
 #### JSHint:
 
+<img src="images-readme/jshint.png">
+
 #### PEP8 Online:
 
-#### Lighthouse:
+Since Pep8Online's domain has been taken over there doesn't seem to be an equivalent website for the check so the closest I was able to get was a syntax checker.
 
-### Automated Testing
+### Forms.py
 
-#### Jest:
+<img src="images-readme/forms-py.png">
 
-#### Django testing tools:
+### Models.py
+
+<img src="images-readme/models-py.png">
+
+### Admin.py
+
+<img src="images-readme/admin-py.png">
+
+### Urls.py
+
+<img src="images-readme/urls-py.png">
+
+### Views.py
+
+<img src="images-readme/views-py.png">
 
 ### User Stories testing
+
+USER STORY: Delete a comment
+
+- The user is only able to delete their own comment and not anyone elses. There is also a confirmation page to show if the deletion was a mistake.
+
+USER STORY: Edit a comment
+
+- The user is able to edit only their comments and not anyone elses. There is also a cancel button if they choose not to make any modifications.
+
+USER STORY: Dislike/Cancel Dislike
+
+- The user and Admin are able to dislike a post and with the same functionality of clicking the dislike button will let the user "un-dislike" if it was made in error or they decide to change their mind on their review.
+
+USER STORY: Delete Posts
+
+- Only the Admin is able to delete posts. They can either do this from the Admin panel or directly on the post itself by clicking the Edit button which only shows if the admin is logged in.
+
+USER STORY: Approve comments
+
+- I did implement this, but decided against using it as I did not want to restrict users opinions even if they may go against the grain. 
+
+USER STORY: Create drafts
+
+- The Admin is able to save their post as a draft if they decide not to finish it in one sitting.
+
+USER STORY: Manage posts
+
+- The Admin is able to manage all the posts either individually within the frontend of the site, or navigating to the Admin console to get a more detailed look or decide to filter be specifics.
+
+USER STORY: Like/Unlike
+
+- The user and Admin are able to like a post and with the same functionality of clicking the like button will let the user "un-like" if it was made in error or they decide to change their mind on their review.
+
+
+USER STORY: Comment on a post
+
+- The user and Admin are both able to comment on any post as long as they're logged in. They must be logged in otherwise the comment box will not show.
+
+USER STORY: Account registration
+
+- A user will be able to create an account using the link in the navbar to sign up using a username, email and password. 
+
+USER STORY: View comments
+
+- Any user that visits the website will be able to view comments on any post so that they can gauge views from the public without the need for registering for an account.
+
+USER STORY: View likes
+
+- Any user that visits the website will be able to view likes on any post so that they can gauge interest from the public without the need for registering for an account.
+
+USER STORY: Open a post
+
+- Any user is able to open a post to view the contents of the post. Such as the time of creation, who posted it, their details of the review, the likes/dislikes, the likes/dislike ration, the number of comments.
+
+USER STORY: Site pagination
+
+- The posts are automatically listed by the device screen size. On wider screens they will be listed in three's, whilst on smaller devices the posts will stack. If there were more posts there would be a page number displayed to allow the user to switch between pages.
 
 The application was deployed to Heroku. The steps to deploy are as follows:
 

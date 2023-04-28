@@ -23,4 +23,4 @@ class PostForm(forms.ModelForm):
             'excerpt',
             'status',
             'streaming_service'
-            ]
+        ]
