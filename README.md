@@ -247,6 +247,27 @@ Since Pep8Online's domain has been taken over there doesn't seem to be an equiva
 
 <img src="images-readme/views-py.png">
 
+### Manual testing
+
+ Test Label    | Test Action   | Expected Outcome  | Test Outcome |
+ |---------------|---------------|-------------------|--------------|
+ | Home Page    | Open website | The url brings you to the main homepage that has all the posts on. | PASS  | --------------------------------
+| Register Link | Click the Register Link | Brings the user to the sign up url where they can input a username, email and password to log in with  | PASS  | 
+| Login Link | Click the Login Link | Brings the user to the login url where they can put their username and password to log into their account | PASS |
+About Us Link | Click the About us Link | Brings the user to the about-us url to display the owner of the website | PASS 
+| Post Detail links | User clicks a post link | Brings the user to the relevant post detail for the movie/tv show they wanted a more detailed view of, perhaps to see the details as well | PASS 
+| Create a post | Admin must be logged in  | When the Admin is logged in they will see a Create Post button in the top right to add a new post to the website | PASS
+| Edit a post | Admin must be logged in and viewing a post | On the post there is a button to bring the Admin to the Edit page where they can make changes and save them. As well as cancel | PASS | 
+Delete a post | Admin must be logged in and viewing a post | On the post there is a button to bring the Admin to the Edit page where they can scroll to the bottom to find a Delete button. Upon clicking it takes them to a page to confirm the deletion process | PASS
+| Add a comment | A user must be logged in and viewing a post | On the post there is a comment box to allow the user to add a comment to the page they're currently on. Upon submitting the page refreshes, thanks them for the comment and they can see the comment on the page | PASS
+| Edit a comment | A user must be logged in and viewing a post | On the post there is a comment list the user can see. If one or more of their comments are there, they are able to click the Edit link beneath their comment. This takes them to a page to edit their comment where they can save the changes or cancel | PASS
+| Delete a comment | A user must be logged in and viewing a post | On the post there is a comment list the user can see. If one or more of their comments are there, they are able to click the Delete link beneath their comment. This takes them to a page to delete their comment where they can confirm this or cancel the process | PASS
+| Links in the footer | A user scrolls to the bottom of the page | In the footer there are links to social medias for the website. Upon clicking they take the user to the relevant site for the icons | PASS
+| Log out link | An Admin or User must be logged in | When either the Admin or user has logged in, the register and login links disappear and only a log out option is available. Upon clicking the link it takes the user to a confirmation page to log out or cancel the process | PASS
+| Like/Dislike Button | An Admin or User must be logged in and viewing a post | When either the Admin or user has logged in, within the post detail view there is a heart icon for like, and a thumbs down for dislike fontawesome icons. Click either will update the corresponding number. The user can again click the same icon to "un-like" the post. Once this has been clicked, the user cannot also click the dislike button and vice-versa | PASS
+| Like/Dislike Ratio | An Admin or User must be logged in and like/dislike a post | When the user clicks either the like or dislike button, the ratio icon next to these is updated in real-time | PASS
+| 404 Page | An Admin or User or non-logged in user navigate to a post with no corresponding page | If the user is able to navigate to a page that doesn't exist, it takes them to the 404 page. On this page is a link to take them back to the homepage if this happens. | PASS
+
 ### User Stories testing
 
 USER STORY: Delete a comment
@@ -305,6 +326,8 @@ USER STORY: Open a post
 USER STORY: Site pagination
 
 - The posts are automatically listed by the device screen size. On wider screens they will be listed in three's, whilst on smaller devices the posts will stack. If there were more posts there would be a page number displayed to allow the user to switch between pages.
+
+## Deployment
 
 The application was deployed to Heroku. The steps to deploy are as follows:
 
