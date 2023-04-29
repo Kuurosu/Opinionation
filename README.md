@@ -376,3 +376,7 @@ The application was deployed to Heroku. The steps to deploy are as follows:
   - In the terminal: Add, Commit and Push.
   - In Heroku navigate to the Deploy tab => click on Deploy Branch.
   - When build process is finished click on Open App to visit the live site.
+
+  ## Credits:
+
+  I'd like to thank my mentor Brian for giving me helpful pointers and code reviews for what I needed adding and improving. 
